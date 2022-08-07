@@ -42,6 +42,7 @@ class ShowConfiguration(command.ShowOne):
             action="store_false",
             help=_("Show password in clear text"),
         )
+
         return parser
 
     def take_action(self, parsed_args):
@@ -57,6 +58,9 @@ class ShowConfiguration(command.ShowOne):
                 o.dest for o in base.get_plugin_options(auth_plg_name)
                 if o.secret
             ]
+
+        if parsed_args.mask and info["password"]:
+            info["password"] = REDACTED
 
         for key, value in info.pop('auth', {}).items():
             if parsed_args.mask and key.lower() in secret_opts:

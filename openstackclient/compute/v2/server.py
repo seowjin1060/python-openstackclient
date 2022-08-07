@@ -2370,11 +2370,13 @@ class ListServer(command.Lister):
             'id',
             'name',
             'status',
+            'created'
         )
         column_headers = (
             'ID',
             'Name',
             'Status',
+            'Created At'
         )
 
         if parsed_args.long:
